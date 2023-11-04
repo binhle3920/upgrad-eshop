@@ -11,7 +11,7 @@ const AuthGuard = () => {
     if (!user) {
       navigate(ROUTES.LOGIN);
     }
-  }, [user]);
+  }, [user, navigate]);
 
   return <Outlet />;
 };
