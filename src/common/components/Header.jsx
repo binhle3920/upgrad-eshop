@@ -1,6 +1,6 @@
 import {AppBar, Button, Stack, Toolbar, Typography} from "@mui/material";
 import {ShoppingCart} from "@mui/icons-material";
-import {useAuth} from "../context/auth/auth-context";
+import {useAuth} from "../../context/auth/auth-context";
 import {Search, SearchIconWrapper, StyledInputBase} from "./Search";
 import SearchIcon from '@mui/icons-material/Search';
 
