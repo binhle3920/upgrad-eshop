@@ -5,13 +5,12 @@ import Footer from "../../common/components/Footer";
 import { useEffect, useState } from "react";
 import { AUTO_CLOSE_NOTIFICATIONS_DURATION, ROUTES } from "../../common/utils/constants";
 import { useAuth } from "../../context/auth/auth-context";
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 
 const LoginScreen = () => {
   const [isValidPassword, setIsValidPassword] = useState(true);
   const [isOpenSnackbar, setIsOpenSnackbar] = useState(false);
   const [loginMessage, setLoginMessage] = useState(null);
-  const [isLoading, setIsLoading] = useState(false);
 
   const navigate = useNavigate();
   const { user, login } = useAuth();
@@ -36,7 +35,6 @@ const LoginScreen = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    setIsLoading(true);
 
     const username = e.target.username.value;
     const password = e.target.password.value;
@@ -44,7 +42,6 @@ const LoginScreen = () => {
     const response = await login({username, password});
     setLoginMessage(response);
     setIsOpenSnackbar(true);
-    setIsLoading(false);
   }
 
   return (
@@ -82,11 +79,13 @@ const LoginScreen = () => {
           </Stack>
         </form>
 
-        <Typography noWrap component="a" variant="subtitle1" href="/signup" width="100%" color="#994696" sx={{
-          textDecoration: "underline",
-        }}>
-          Don't have an account? Sign Up
-        </Typography>
+        <Link to={ROUTES.SIGNUP}>
+          <Typography noWrap variant="subtitle1" width="100%" color="#994696" sx={{
+            textDecoration: "underline",
+          }}>
+            Don't have an account? Sign Up
+          </Typography>
+        </Link>
 
         <Box pt={4}>
           <Footer />

@@ -5,7 +5,7 @@ import Footer from "../../common/components/Footer";
 import { useEffect, useState } from "react";
 import { useAuth } from "../../context/auth/auth-context";
 import { AUTO_CLOSE_NOTIFICATIONS_DURATION, ROUTES } from "../../common/utils/constants";
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 
 const SignUpScreen = () => {
   const [isValidPassword, setIsValidPassword] = useState(true);
@@ -13,7 +13,6 @@ const SignUpScreen = () => {
   const [password, setPassword] = useState('');
   const [isOpenSnackbar, setIsOpenSnackbar] = useState(false);
   const [signupMessage, setSignupMessage] = useState(null);
-  const [isLoading, setIsLoading] = useState(false);
 
   const navigate = useNavigate();
   const { user, signup } = useAuth();
@@ -52,7 +51,6 @@ const SignUpScreen = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    setIsLoading(true);
 
     const firstName = e.target.firstName.value;
     const lastName = e.target.lastName.value;
@@ -63,7 +61,6 @@ const SignUpScreen = () => {
     const response = await signup({ firstName, lastName, email, contactNumber, password });
     setSignupMessage(response);
     setIsOpenSnackbar(true);
-    setIsLoading(false);
   }
 
   return (
@@ -115,11 +112,13 @@ const SignUpScreen = () => {
           </Stack>
         </form>
 
-        <Typography noWrap component="a" variant="subtitle1" href="/login" width="100%" color="#994696" align="right" sx={{
-          textDecoration: "underline",
-        }}>
-          Already have an account? Sign In
-        </Typography>
+        <Link to={ROUTES.LOGIN}>
+          <Typography noWrap variant="subtitle1" width="100%" color="#994696" align="right" sx={{
+            textDecoration: "underline",
+          }}>
+            Already have an account? Sign In
+          </Typography>
+        </Link>
 
         <Box pt={4}>
           <Footer />

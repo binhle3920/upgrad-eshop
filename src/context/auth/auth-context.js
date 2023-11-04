@@ -1,11 +1,20 @@
-import {useState, createContext, useContext} from "react";
+import { useState, createContext, useContext, useEffect } from "react";
 import { login, signUp } from "../../api/auth";
+import { USER_ROLES } from "../../common/utils/constants";
+import { removeAccessToken, saveAccessToken } from "../../common/services/auth";
 
 export const AuthContext = createContext(undefined);
 
 export const useAuthProvider = () => {
   const [user, setUser] = useState(null);
-  const [accessToken, setAccessToken] = useState(null);
+
+  useEffect(() => {
+    const accessToken = localStorage.getItem('accessToken');
+    if (accessToken) {
+      // TODO: verify token and get user details
+      setUser({username: 'user', role: USER_ROLES.USER});
+    }
+  }, []);
 
   const userLogin = async ({username, password}) => {
     try {
@@ -20,7 +29,10 @@ export const useAuthProvider = () => {
 
       if (response.status === 200) {
         const { token } = await response.json();
-        setAccessToken(token);
+
+        saveAccessToken(token);
+        setUser({username, role: USER_ROLES.USER});
+
         return {
           message: 'Login successful',
           severity: 'success'
@@ -58,6 +70,7 @@ export const useAuthProvider = () => {
   const userLogout = () => {
     console.log('😭 user logged out');
     setUser(null);
+    removeAccessToken();
   };
 
   return {
