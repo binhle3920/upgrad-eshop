@@ -1,8 +1,8 @@
 import React from "react";
-import ReactDOM from "react-dom";
 import "./index.css";
 import App from "./App";
 import AuthProvider from "./context/auth/auth-provider";
+import { createRoot } from "react-dom/client";
 
 function ConnectedApp() {
   return (
@@ -12,4 +12,4 @@ function ConnectedApp() {
   );
 }
 
-ReactDOM.render(<ConnectedApp />, document.getElementById("root"));
+createRoot(document.getElementById("root")).render(<ConnectedApp />);
