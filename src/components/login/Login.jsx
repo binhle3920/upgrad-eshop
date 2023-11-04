@@ -2,8 +2,23 @@ import { Box, Stack, Typography, TextField } from "@mui/material";
 import LockOutlinedIcon from '@mui/icons-material/LockOutlined';
 import CommonButton from "../../common/components/Button";
 import Footer from "../../common/components/Footer";
+import { useState } from "react";
 
 const LoginScreen = () => {
+  const [isValidPassword, setIsValidPassword] = useState(true);
+
+  const handlePasswordChange = (e) => {
+    const password = e.target.value;
+    const isValid = password.length >= 6 && password.length <= 40;
+
+    if (password.length === 0) {
+      setIsValidPassword(true);
+      return;
+    }
+
+    setIsValidPassword(isValid);
+  }
+
   const handleSubmit = (e) => {
     e.preventDefault();
 
@@ -20,15 +35,24 @@ const LoginScreen = () => {
         </Stack>
 
         <Typography variant="h4" pb={2}>
-          Sign In
+          Sign in
         </Typography>
 
         <form onSubmit={handleSubmit} style={{
           width: '100%',
         }}>
           <Stack direction="column" spacing={2} width="100%">
-            <TextField id="username" label="Email Address" variant="outlined" type="email" />
-            <TextField id="password" label="Password" variant="outlined" type="password" />
+            <TextField id="username" label="Email Address" variant="outlined" type="email" required />
+            <TextField
+              id="password"
+              label="Password"
+              variant="outlined"
+              type="password"
+              required
+              error={!isValidPassword}
+              helperText={!isValidPassword && "Password must be between 6 to 40 characters"}
+              onChange={handlePasswordChange}
+            />
 
             <Stack pt={2}>
               <CommonButton label="Sign In" type="submit" />
