@@ -1,10 +1,27 @@
-export const login = (email, password) =>
-  new Promise((resolve, reject) => {
-    if (email === "homer@springfield.com" && password === "donuts") {
-      resolve({ name: "Homer Simpson", userId: "HMSP01", role: "USER" });
-    } else if (email === "admin@upgrad.com" && password === "admin") {
-      resolve({ name: "Admin", userId: "ADMIN01", role: "ADMIN" });
-    } else {
-      reject("Incorrect email or password...");
+import { API_URL } from "../common/utils/constants";
+
+export const signUp = async ({ firstName, lastName, email, contactNumber, password }) => {
+  return await fetch(
+    `${API_URL}/auth/signup`,
+    {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({email, password, firstName, lastName, contactNumber}),
     }
-  });
+  );
+}
+
+export const login = async ({ username, password }) => {
+  return await fetch(
+    `${API_URL}/auth/signin`,
+    {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({username, password}),
+    }
+  );
+}

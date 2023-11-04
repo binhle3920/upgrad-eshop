@@ -1,13 +1,28 @@
-import { Box, Stack, Typography, TextField } from "@mui/material";
+import { Box, Stack, Typography, TextField, Snackbar, Alert } from "@mui/material";
 import LockOutlinedIcon from '@mui/icons-material/LockOutlined';
 import CommonButton from "../../common/components/Button";
 import Footer from "../../common/components/Footer";
-import { useState } from "react";
+import { useEffect, useState } from "react";
+import { useAuth } from "../../context/auth/auth-context";
+import { AUTO_CLOSE_NOTIFICATIONS_DURATION, ROUTES } from "../../common/utils/constants";
+import { useNavigate } from "react-router-dom";
 
 const SignUpScreen = () => {
   const [isValidPassword, setIsValidPassword] = useState(true);
   const [isValidConfirmPassword, setIsValidConfirmPassword] = useState(true);
   const [password, setPassword] = useState('');
+  const [isOpenSnackbar, setIsOpenSnackbar] = useState(false);
+  const [signupMessage, setSignupMessage] = useState(null);
+  const [isLoading, setIsLoading] = useState(false);
+
+  const navigate = useNavigate();
+  const { user, signup } = useAuth();
+
+  useEffect(() => {
+    if (user) {
+      navigate(ROUTES.HOME);
+    }
+  }, [user]);
 
   const handlePasswordChange = (e) => {
     const psw = e.target.value;
@@ -35,8 +50,20 @@ const SignUpScreen = () => {
     setIsValidConfirmPassword(isValid);
   }
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
+    setIsLoading(true);
+
+    const firstName = e.target.firstName.value;
+    const lastName = e.target.lastName.value;
+    const email = e.target.email.value;
+    const contactNumber = e.target.contactNumber.value;
+    const password = e.target.password.value;
+
+    const response = await signup({ firstName, lastName, email, contactNumber, password });
+    setSignupMessage(response);
+    setIsOpenSnackbar(true);
+    setIsLoading(false);
   }
 
   return (
@@ -98,6 +125,17 @@ const SignUpScreen = () => {
           <Footer />
         </Box>
       </Stack>
+
+      <Snackbar
+        anchorOrigin={{ vertical: 'top',  horizontal: 'right' }}
+        open={isOpenSnackbar}
+        onClose={() => setIsOpenSnackbar(false)}
+        autoHideDuration={AUTO_CLOSE_NOTIFICATIONS_DURATION}
+      >
+        <Alert onClose={() => setIsOpenSnackbar(false)} severity={signupMessage?.severity}>
+          {signupMessage?.message}
+        </Alert>
+      </Snackbar>
     </Stack>
   )
 }

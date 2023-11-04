@@ -1,11 +1,26 @@
-import { Box, Stack, Typography, TextField } from "@mui/material";
+import { Box, Stack, Typography, TextField, Alert, Snackbar } from "@mui/material";
 import LockOutlinedIcon from '@mui/icons-material/LockOutlined';
 import CommonButton from "../../common/components/Button";
 import Footer from "../../common/components/Footer";
-import { useState } from "react";
+import { useEffect, useState } from "react";
+import { AUTO_CLOSE_NOTIFICATIONS_DURATION, ROUTES } from "../../common/utils/constants";
+import { useAuth } from "../../context/auth/auth-context";
+import { useNavigate } from "react-router-dom";
 
 const LoginScreen = () => {
   const [isValidPassword, setIsValidPassword] = useState(true);
+  const [isOpenSnackbar, setIsOpenSnackbar] = useState(false);
+  const [loginMessage, setLoginMessage] = useState(null);
+  const [isLoading, setIsLoading] = useState(false);
+
+  const navigate = useNavigate();
+  const { user, login } = useAuth();
+
+  useEffect(() => {
+    if (user) {
+      navigate(ROUTES.HOME);
+    }
+  }, [user]);
 
   const handlePasswordChange = (e) => {
     const password = e.target.value;
@@ -19,10 +34,17 @@ const LoginScreen = () => {
     setIsValidPassword(isValid);
   }
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
+    setIsLoading(true);
 
-    console.log('submit', e.target.username.value, e.target.password.value);
+    const username = e.target.username.value;
+    const password = e.target.password.value;
+
+    const response = await login({username, password});
+    setLoginMessage(response);
+    setIsOpenSnackbar(true);
+    setIsLoading(false);
   }
 
   return (
@@ -70,6 +92,17 @@ const LoginScreen = () => {
           <Footer />
         </Box>
       </Stack>
+
+      <Snackbar
+        anchorOrigin={{ vertical: 'top',  horizontal: 'right' }}
+        open={isOpenSnackbar}
+        onClose={() => setIsOpenSnackbar(false)}
+        autoHideDuration={AUTO_CLOSE_NOTIFICATIONS_DURATION}
+      >
+        <Alert onClose={() => setIsOpenSnackbar(false)} severity={loginMessage?.severity}>
+          {loginMessage?.message}
+        </Alert>
+      </Snackbar>
     </Stack>
   )
 }

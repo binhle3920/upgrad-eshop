@@ -1,31 +1,69 @@
 import {useState, createContext, useContext} from "react";
-import {login} from "../../api/auth";
+import { login, signUp } from "../../api/auth";
 
 export const AuthContext = createContext(undefined);
 
-export const useAuthProvider = (history, location) => {
+export const useAuthProvider = () => {
   const [user, setUser] = useState(null);
-  const [error, setError] = useState(null);
+  const [accessToken, setAccessToken] = useState(null);
 
-  const userLogin = (email, password) =>
-    login(email, password)
-      .then(user => {
-        console.log('👨‍💻 user logged in');
-        setUser(user);
-        setError(null);
-      })
-      .catch(error => setError(error));
+  const userLogin = async ({username, password}) => {
+    try {
+      const response = await login({username, password})
+
+      if (response.status === 401) {
+        return {
+          message: 'Invalid username or password',
+          severity: 'error'
+        }
+      }
+
+      if (response.status === 200) {
+        const { token } = await response.json();
+        setAccessToken(token);
+        return {
+          message: 'Login successful',
+          severity: 'success'
+        }
+      }
+    } catch (error) {
+      console.log('😭 user logged in error', error);
+
+      return {
+        message: 'Something went wrong. Please try again.',
+        severity: 'error'
+      }
+    }
+  }
+
+  const userSignup = async ({ firstName, lastName, email, contactNumber, password }) => {
+    try {
+      const response = await signUp({firstName, lastName, email, contactNumber, password})
+      const isSuccessful = response.status === 200;
+      const { message } = await response.json();
+
+      return {
+        message,
+        severity: isSuccessful ? 'success' : 'error'
+      }
+    } catch (error) {
+      console.log('😭 user signed up error', error);
+      return {
+        message: 'Something went wrong. Please try again.',
+        severity: 'error'
+      }
+    }
+  }
 
   const userLogout = () => {
     console.log('😭 user logged out');
     setUser(null);
-    setError(null);
   };
 
   return {
-    error,
     user,
     login: userLogin,
+    signup: userSignup,
     logout: userLogout
   }
 };
