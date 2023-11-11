@@ -1,7 +1,7 @@
 import { Button } from "@mui/material";
 
 export const CommonButton = (props) => {
-  const { label, loading, ...rest } = props;
+  const { label, sx, ...rest } = props;
   return (
     <Button
       variant="contained"
@@ -14,6 +14,8 @@ export const CommonButton = (props) => {
         '&:hover': {
           backgroundColor: "#22378a",
         },
+
+        ...sx,
       }}
     >
       {label}

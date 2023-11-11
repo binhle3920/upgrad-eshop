@@ -10,7 +10,7 @@ const Header = () => {
   const { user, logout } = useAuth();
 
   const isUserLoggedIn = !!user;
-  const isAdmin = user?.roles.includes(USER_ROLES.ADMIN);
+  const isAdmin = user?.roles?.includes(USER_ROLES.ADMIN);
 
   return (
     <AppBar component="nav" position="sticky" px="md" sx={{

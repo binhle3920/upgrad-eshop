@@ -12,7 +12,7 @@ const AdminGuard = () => {
       navigate(ROUTES.LOGIN);
     }
 
-    if (!user.roles.includes(USER_ROLES.ADMIN)) {
+    if (!user?.roles?.includes(USER_ROLES.ADMIN)) {
       navigate(ROUTES.HOME);
     }
   }, [user, navigate]);

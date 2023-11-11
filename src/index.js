@@ -3,11 +3,14 @@ import "./index.css";
 import App from "./App";
 import AuthProvider from "./context/auth/auth-provider";
 import { createRoot } from "react-dom/client";
+import ProductsProvider from "./context/products/products-provider";
 
 function ConnectedApp() {
   return (
     <AuthProvider>
-      <App />
+      <ProductsProvider>
+        <App />
+      </ProductsProvider>
     </AuthProvider>
   );
 }

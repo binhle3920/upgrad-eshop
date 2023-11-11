@@ -13,7 +13,7 @@ import {
 } from "@mui/material";
 import LockOutlinedIcon from "@mui/icons-material/LockOutlined";
 import CommonButton from "../../common/components/Button";
-import { addProduct } from "../../api/product";
+import { useProducts } from "../../context/products/products-context";
 
 const CATEGORY_OPTIONS = {
   APPAREL: 'Apparel',
@@ -25,6 +25,8 @@ const AddProductScreen = () => {
   const [isOpenSnackbar, setIsOpenSnackbar] = useState(false);
   const [message, setMessage] = useState(null);
   const [category, setCategory] = useState(CATEGORY_OPTIONS.APPAREL);
+
+  const { addProduct } = useProducts();
 
   const handleCategoryChange = (e) => {
     setCategory(e.target.value);
@@ -44,20 +46,13 @@ const AddProductScreen = () => {
     }
 
     const response = await addProduct(product);
-
-    if (response.status === 201) {
-      setMessage({
-        severity: 'success',
-        message: `Product ${product.name} added successfully`
-      })
-    } else {
-      setMessage({
-        severity: 'error',
-        message: `Error adding product ${product.name}`
-      })
-    }
-
+    setMessage(response);
     setIsOpenSnackbar(true);
+
+    if (response.severity === 'success') {
+      e.target.reset();
+      setCategory(CATEGORY_OPTIONS.APPAREL);
+    }
   }
 
   return (
