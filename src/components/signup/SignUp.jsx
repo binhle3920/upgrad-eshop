@@ -4,7 +4,7 @@ import CommonButton from "../../common/components/Button";
 import Footer from "../../common/components/Footer";
 import { useEffect, useState } from "react";
 import { useAuth } from "../../context/auth/auth-context";
-import { AUTO_CLOSE_NOTIFICATIONS_DURATION, ROUTES } from "../../common/utils/constants";
+import { AUTO_CLOSE_NOTIFICATIONS_DURATION, ROUTES } from "../../utils/constants";
 import { Link, useNavigate } from "react-router-dom";
 
 const SignUpScreen = () => {

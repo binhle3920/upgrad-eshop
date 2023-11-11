@@ -1,4 +1,4 @@
-import { API_URL } from "../common/utils/constants";
+import { API_URL } from "../utils/constants";
 import { getAccessToken } from "../common/services/auth";
 
 export const addProduct = async ({ name, category, price, description, manufacturer, availableItems, imageUrl }) => {

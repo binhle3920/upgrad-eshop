@@ -1,4 +1,4 @@
-import { API_URL } from "../common/utils/constants";
+import { API_URL } from "../utils/constants";
 
 export const signUp = async ({ firstName, lastName, email, contactNumber, password }) => {
   return await fetch(

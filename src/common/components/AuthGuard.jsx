@@ -1,6 +1,6 @@
 import { useAuth } from "../../context/auth/auth-context";
 import { Outlet, useNavigate } from "react-router-dom";
-import { ROUTES } from "../utils/constants";
+import { ROUTES } from "../../utils/constants";
 import { useEffect } from "react";
 
 const AuthGuard = () => {

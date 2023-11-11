@@ -1,7 +1,7 @@
 import {BrowserRouter, Route, Routes} from "react-router-dom";
 import Layout from "./common/components/Layout";
 import AuthGuard from "./common/components/AuthGuard";
-import { ROUTES } from "./common/utils/constants";
+import { ROUTES } from "./utils/constants";
 import LoginScreen from "./components/login/Login";
 import SignUpScreen from "./components/signup/SignUp";
 import HomeScreen from "./components/home/Home";

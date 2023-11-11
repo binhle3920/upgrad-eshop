@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { AUTO_CLOSE_NOTIFICATIONS_DURATION } from "../../common/utils/constants";
+import { AUTO_CLOSE_NOTIFICATIONS_DURATION } from "../../utils/constants";
 import {
   Alert,
   FormControl,
@@ -85,6 +85,7 @@ const AddProductScreen = () => {
                 labelId="category-label"
                 label="Category"
                 onChange={handleCategoryChange}
+                value={category}
               >
                 <MenuItem value={CATEGORY_OPTIONS.APPAREL}>Apparel</MenuItem>
                 <MenuItem value={CATEGORY_OPTIONS.ELECTRONICS}>Electronics</MenuItem>

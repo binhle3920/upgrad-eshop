@@ -1,7 +1,7 @@
 import { useState, createContext, useContext, useEffect } from "react";
 import { login, signUp } from "../../api/auth";
-import { USER_ROLES } from "../../common/utils/constants";
-import { removeAccessToken, saveAccessToken } from "../../common/services/auth";
+import { removeAccessToken, removeRoles, saveAccessToken, saveRoles } from "../../common/services/auth";
+import { convertAccessTokenToUser } from "../../utils/helpers";
 
 export const AuthContext = createContext(undefined);
 
@@ -11,8 +11,8 @@ export const useAuthProvider = () => {
   useEffect(() => {
     const accessToken = localStorage.getItem('accessToken');
     if (accessToken) {
-      // TODO: verify token and get user details
-      setUser({username: 'user', role: USER_ROLES.ADMIN});
+      const user = convertAccessTokenToUser(accessToken);
+      setUser(user);
     }
   }, []);
 
@@ -28,10 +28,11 @@ export const useAuthProvider = () => {
       }
 
       if (response.status === 200) {
-        const { token } = await response.json();
+        const { token, roles } = await response.json();
 
         saveAccessToken(token);
-        setUser({username, role: USER_ROLES.USER});
+        saveRoles(`${roles}`);
+        setUser({ username, roles });
 
         return {
           message: 'Login successful',
@@ -71,6 +72,7 @@ export const useAuthProvider = () => {
     console.log('😭 user logged out');
     setUser(null);
     removeAccessToken();
+    removeRoles();
   };
 
   return {

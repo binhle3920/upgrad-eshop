@@ -3,14 +3,14 @@ import {ShoppingCart} from "@mui/icons-material";
 import {useAuth} from "../../context/auth/auth-context";
 import {Search, SearchIconWrapper, StyledInputBase} from "./Search";
 import SearchIcon from '@mui/icons-material/Search';
-import { ROUTES, USER_ROLES } from "../utils/constants";
+import { ROUTES, USER_ROLES } from "../../utils/constants";
 import { Link } from "react-router-dom";
 
 const Header = () => {
   const { user, logout } = useAuth();
 
   const isUserLoggedIn = !!user;
-  const isAdmin = user?.role === USER_ROLES.ADMIN;
+  const isAdmin = user?.roles.includes(USER_ROLES.ADMIN);
 
   return (
     <AppBar component="nav" position="sticky" px="md" sx={{
