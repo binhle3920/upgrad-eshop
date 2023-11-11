@@ -19,7 +19,7 @@ const LoginScreen = () => {
     if (user) {
       navigate(ROUTES.HOME);
     }
-  }, [user]);
+  }, [user, navigate]);
 
   const handlePasswordChange = (e) => {
     const password = e.target.value;

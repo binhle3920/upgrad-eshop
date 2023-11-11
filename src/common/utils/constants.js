@@ -2,6 +2,12 @@ export const ROUTES = {
   HOME: "/",
   LOGIN: "/login",
   SIGNUP: "/signup",
+
+  // ADMIN
+  ADMIN: {
+    ADD_PRODUCT: "/admin/add-product",
+    EDIT_PRODUCT: "/admin/edit-product",
+  }
 }
 
 export const USER_ROLES = {

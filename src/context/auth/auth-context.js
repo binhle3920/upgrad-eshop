@@ -12,7 +12,7 @@ export const useAuthProvider = () => {
     const accessToken = localStorage.getItem('accessToken');
     if (accessToken) {
       // TODO: verify token and get user details
-      setUser({username: 'user', role: USER_ROLES.USER});
+      setUser({username: 'user', role: USER_ROLES.ADMIN});
     }
   }, []);
 

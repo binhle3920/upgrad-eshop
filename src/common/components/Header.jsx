@@ -49,7 +49,7 @@ const Header = () => {
                 </Typography>
               </Link>
               {isAdmin && (
-                <Link to={ROUTES.HOME}>
+                <Link to={ROUTES.ADMIN.ADD_PRODUCT}>
                   <Typography noWrap variant="subtitle1" sx={{
                     textDecoration: "underline",
                   }}>

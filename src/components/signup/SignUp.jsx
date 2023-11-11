@@ -21,7 +21,7 @@ const SignUpScreen = () => {
     if (user) {
       navigate(ROUTES.HOME);
     }
-  }, [user]);
+  }, [user, navigate]);
 
   const handlePasswordChange = (e) => {
     const psw = e.target.value;

@@ -6,6 +6,9 @@ import LoginScreen from "./components/login/Login";
 import SignUpScreen from "./components/signup/SignUp";
 import HomeScreen from "./components/home/Home";
 import NotFoundScreen from "./components/404/404";
+import AdminGuard from "./common/components/AdminGuard";
+import AddProductScreen from "./components/admin/AddProduct";
+import EditProductScreen from "./components/admin/EditProduct";
 
 const App = () => {
   return (
@@ -14,6 +17,11 @@ const App = () => {
       <Route element={<Layout />}>
         <Route element={<AuthGuard />}>
           <Route path={ROUTES.HOME} element={<HomeScreen />} />
+
+          <Route element={<AdminGuard />}>
+            <Route path={ROUTES.ADMIN.ADD_PRODUCT} element={<AddProductScreen />} />
+            <Route path={ROUTES.ADMIN.EDIT_PRODUCT} element={<EditProductScreen />} />
+          </Route>
           {/* TODO: Add others guarded routes below this line */}
         </Route>
 
