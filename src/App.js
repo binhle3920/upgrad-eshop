@@ -13,24 +13,24 @@ import EditProductScreen from "./components/admin/EditProduct";
 const App = () => {
   return (
     <BrowserRouter>
-    <Routes>
-      <Route element={<Layout />}>
-        <Route element={<AuthGuard />}>
-          <Route path={ROUTES.HOME} element={<HomeScreen />} />
+      <Routes>
+        <Route element={<Layout />}>
+          <Route element={<AuthGuard />}>
+            <Route path={ROUTES.HOME} element={<HomeScreen />} />
 
-          <Route element={<AdminGuard />}>
-            <Route path={ROUTES.ADMIN.ADD_PRODUCT} element={<AddProductScreen />} />
-            <Route path={ROUTES.ADMIN.EDIT_PRODUCT} element={<EditProductScreen />} />
+            <Route element={<AdminGuard />}>
+              <Route path={ROUTES.ADMIN.ADD_PRODUCT} element={<AddProductScreen />} />
+              <Route path={ROUTES.ADMIN.EDIT_PRODUCT} element={<EditProductScreen />} />
+            </Route>
+            {/* TODO: Add others guarded routes below this line */}
           </Route>
-          {/* TODO: Add others guarded routes below this line */}
+
+          <Route path={ROUTES.LOGIN} element={<LoginScreen />} />
+          <Route path={ROUTES.SIGNUP} element={<SignUpScreen />} />
+
+          <Route path="*" element={<NotFoundScreen />} />
         </Route>
-
-        <Route path={ROUTES.LOGIN} element={<LoginScreen />} />
-        <Route path={ROUTES.SIGNUP} element={<SignUpScreen />} />
-
-        <Route path="*" element={<NotFoundScreen />} />
-      </Route>
-    </Routes>
+      </Routes>
     </BrowserRouter>
   );
 };

@@ -4,12 +4,17 @@ import App from "./App";
 import AuthProvider from "./context/auth/auth-provider";
 import { createRoot } from "react-dom/client";
 import ProductsProvider from "./context/products/products-provider";
+import SnackbarProvider from "./context/snackbar/snackbar-provider";
+import CustomSnackbar from "./common/components/Snackbar";
 
 function ConnectedApp() {
   return (
     <AuthProvider>
       <ProductsProvider>
-        <App />
+        <SnackbarProvider>
+          <App />
+          <CustomSnackbar />
+        </SnackbarProvider>
       </ProductsProvider>
     </AuthProvider>
   );

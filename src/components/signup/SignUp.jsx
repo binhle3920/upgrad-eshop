@@ -1,21 +1,21 @@
-import { Box, Stack, Typography, TextField, Snackbar, Alert } from "@mui/material";
+import { Box, Stack, Typography, TextField } from "@mui/material";
 import LockOutlinedIcon from '@mui/icons-material/LockOutlined';
 import CommonButton from "../../common/components/Button";
 import Footer from "../../common/components/Footer";
 import { useEffect, useState } from "react";
 import { useAuth } from "../../context/auth/auth-context";
-import { AUTO_CLOSE_NOTIFICATIONS_DURATION, ROUTES } from "../../utils/constants";
+import { ROUTES } from "../../utils/constants";
 import { Link, useNavigate } from "react-router-dom";
+import { useSnackbar } from "../../context/snackbar/snackbar-context";
 
 const SignUpScreen = () => {
   const [isValidPassword, setIsValidPassword] = useState(true);
   const [isValidConfirmPassword, setIsValidConfirmPassword] = useState(true);
   const [password, setPassword] = useState('');
-  const [isOpenSnackbar, setIsOpenSnackbar] = useState(false);
-  const [signupMessage, setSignupMessage] = useState(null);
 
   const navigate = useNavigate();
   const { user, signup } = useAuth();
+  const { showNotification } = useSnackbar();
 
   useEffect(() => {
     if (user) {
@@ -59,8 +59,7 @@ const SignUpScreen = () => {
     const password = e.target.password.value;
 
     const response = await signup({ firstName, lastName, email, contactNumber, password });
-    setSignupMessage(response);
-    setIsOpenSnackbar(true);
+    showNotification(response);
   }
 
   return (
@@ -124,17 +123,6 @@ const SignUpScreen = () => {
           <Footer />
         </Box>
       </Stack>
-
-      <Snackbar
-        anchorOrigin={{ vertical: 'top',  horizontal: 'right' }}
-        open={isOpenSnackbar}
-        onClose={() => setIsOpenSnackbar(false)}
-        autoHideDuration={AUTO_CLOSE_NOTIFICATIONS_DURATION}
-      >
-        <Alert onClose={() => setIsOpenSnackbar(false)} severity={signupMessage?.severity}>
-          {signupMessage?.message}
-        </Alert>
-      </Snackbar>
     </Stack>
   )
 }

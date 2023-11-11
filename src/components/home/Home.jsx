@@ -1,17 +1,16 @@
 import { useProducts } from "../../context/products/products-context";
-import { Alert, Box, Snackbar } from "@mui/material";
+import { Box } from "@mui/material";
 import ProductItem from "../../common/components/ProductItem";
 import ConfirmDialog from "../../common/components/ConfirmDialog";
 import { useState } from "react";
-import { AUTO_CLOSE_NOTIFICATIONS_DURATION } from "../../utils/constants";
+import { useSnackbar } from "../../context/snackbar/snackbar-context";
 
 const HomeScreen = () => {
-  const { products, removeProduct } = useProducts();
-
   const [isOpenConfirmDialog, setIsOpenConfirmDialog] = useState(false);
   const [selectedProductId, setSelectedProductId] = useState(null);
-  const [message, setMessage] = useState(null);
-  const [isOpenSnackbar, setIsOpenSnackbar] = useState(false);
+
+  const { products, removeProduct } = useProducts();
+  const { showSnackbar } = useSnackbar();
 
   const handleShowDeleteDialog = (id) => {
     setIsOpenConfirmDialog(true);
@@ -25,8 +24,7 @@ const HomeScreen = () => {
 
   const handleDeleteProduct = async () => {
     const response = await removeProduct(selectedProductId);
-    setMessage(response);
-    setIsOpenSnackbar(true);
+    showSnackbar(response);
     handleCloseDeleteDialog();
   }
 
@@ -45,17 +43,6 @@ const HomeScreen = () => {
         description="Are you sure you want to delete the product?"
         onSubmit={handleDeleteProduct}
       />
-
-      <Snackbar
-        anchorOrigin={{ vertical: 'top',  horizontal: 'right' }}
-        open={isOpenSnackbar}
-        onClose={() => setIsOpenSnackbar(false)}
-        autoHideDuration={AUTO_CLOSE_NOTIFICATIONS_DURATION}
-      >
-        <Alert onClose={() => setIsOpenSnackbar(false)} severity={message?.severity}>
-          {message?.message}
-        </Alert>
-      </Snackbar>
     </Box>
   )
 }

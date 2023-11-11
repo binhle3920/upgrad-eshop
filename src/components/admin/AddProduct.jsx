@@ -1,12 +1,9 @@
 import { useState } from "react";
-import { AUTO_CLOSE_NOTIFICATIONS_DURATION } from "../../utils/constants";
 import {
-  Alert,
   FormControl,
   InputLabel,
   MenuItem,
   Select,
-  Snackbar,
   Stack,
   TextField,
   Typography
@@ -14,6 +11,7 @@ import {
 import LockOutlinedIcon from "@mui/icons-material/LockOutlined";
 import CommonButton from "../../common/components/Button";
 import { useProducts } from "../../context/products/products-context";
+import { useSnackbar } from "../../context/snackbar/snackbar-context";
 
 const CATEGORY_OPTIONS = {
   APPAREL: 'Apparel',
@@ -22,11 +20,10 @@ const CATEGORY_OPTIONS = {
 };
 
 const AddProductScreen = () => {
-  const [isOpenSnackbar, setIsOpenSnackbar] = useState(false);
-  const [message, setMessage] = useState(null);
   const [category, setCategory] = useState(CATEGORY_OPTIONS.APPAREL);
 
   const { addProduct } = useProducts();
+  const { showNotification } = useSnackbar();
 
   const handleCategoryChange = (e) => {
     setCategory(e.target.value);
@@ -46,8 +43,7 @@ const AddProductScreen = () => {
     }
 
     const response = await addProduct(product);
-    setMessage(response);
-    setIsOpenSnackbar(true);
+    showNotification(response);
 
     if (response.severity === 'success') {
       e.target.reset();
@@ -99,17 +95,6 @@ const AddProductScreen = () => {
           </Stack>
         </form>
       </Stack>
-
-      <Snackbar
-        anchorOrigin={{ vertical: 'top',  horizontal: 'right' }}
-        open={isOpenSnackbar}
-        onClose={() => setIsOpenSnackbar(false)}
-        autoHideDuration={AUTO_CLOSE_NOTIFICATIONS_DURATION}
-      >
-        <Alert onClose={() => setIsOpenSnackbar(false)} severity={message?.severity}>
-          {message?.message}
-        </Alert>
-      </Snackbar>
     </Stack>
   )
 }

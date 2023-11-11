@@ -1,19 +1,19 @@
-import { Box, Stack, Typography, TextField, Alert, Snackbar } from "@mui/material";
+import { Box, Stack, Typography, TextField } from "@mui/material";
 import LockOutlinedIcon from '@mui/icons-material/LockOutlined';
 import CommonButton from "../../common/components/Button";
 import Footer from "../../common/components/Footer";
 import { useEffect, useState } from "react";
-import { AUTO_CLOSE_NOTIFICATIONS_DURATION, ROUTES } from "../../utils/constants";
+import { ROUTES } from "../../utils/constants";
 import { useAuth } from "../../context/auth/auth-context";
 import { Link, useNavigate } from "react-router-dom";
+import { useSnackbar } from "../../context/snackbar/snackbar-context";
 
 const LoginScreen = () => {
   const [isValidPassword, setIsValidPassword] = useState(true);
-  const [isOpenSnackbar, setIsOpenSnackbar] = useState(false);
-  const [loginMessage, setLoginMessage] = useState(null);
 
   const navigate = useNavigate();
   const { user, login } = useAuth();
+  const { showNotification } = useSnackbar();
 
   useEffect(() => {
     if (user) {
@@ -40,8 +40,7 @@ const LoginScreen = () => {
     const password = e.target.password.value;
 
     const response = await login({username, password});
-    setLoginMessage(response);
-    setIsOpenSnackbar(true);
+    showNotification(response);
   }
 
   return (
@@ -91,17 +90,6 @@ const LoginScreen = () => {
           <Footer />
         </Box>
       </Stack>
-
-      <Snackbar
-        anchorOrigin={{ vertical: 'top',  horizontal: 'right' }}
-        open={isOpenSnackbar}
-        onClose={() => setIsOpenSnackbar(false)}
-        autoHideDuration={AUTO_CLOSE_NOTIFICATIONS_DURATION}
-      >
-        <Alert onClose={() => setIsOpenSnackbar(false)} severity={loginMessage?.severity}>
-          {loginMessage?.message}
-        </Alert>
-      </Snackbar>
     </Stack>
   )
 }

@@ -4,12 +4,9 @@ import { useAuth } from "../../context/auth/auth-context";
 import { USER_ROLES } from "../../utils/constants";
 import DeleteIcon from '@mui/icons-material/Delete';
 import EditIcon from '@mui/icons-material/Edit';
-import { useState } from "react";
 
 const ProductItem = ({ id, imageUrl, name, description, price, onDelete }) => {
   const { user } = useAuth();
-
-  const [isOpenConfirmDialog, setIsOpenConfirmDialog] = useState(false);
 
   const isAdmin = user?.roles?.includes(USER_ROLES.ADMIN);
 
