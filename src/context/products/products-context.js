@@ -1,5 +1,5 @@
 import { useState, createContext, useContext, useEffect } from "react";
-import { addProduct, getProducts, removeProduct } from "../../api/product";
+import { addProduct, getProducts, modifyProduct, removeProduct } from "../../api/product";
 
 export const ProductsContext = createContext(undefined);
 
@@ -53,9 +53,33 @@ export const useProductsProvider = () => {
     }
   }
 
+  const modify = async (productId, product) => {
+    const response = await modifyProduct(productId, product);
+    const index = products.findIndex(product => product.id === productId);
+
+    if (response.status === 200) {
+      setProducts((prev) => {
+        const newProducts = [...prev];
+        newProducts[index] = product;
+        return newProducts;
+      });
+
+      return {
+        severity: 'success',
+        message: `Product ${product.name} modified successfully`
+      }
+    } else {
+      return {
+        severity: 'error',
+        message: `Error modifying product ${product.name}`
+      }
+    }
+  }
+
   return {
     products,
     addProduct: add,
+    modifyProduct: modify,
     removeProduct: remove
   }
 };

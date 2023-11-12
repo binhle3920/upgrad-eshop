@@ -20,7 +20,7 @@ const App = () => {
 
             <Route element={<AdminGuard />}>
               <Route path={ROUTES.ADMIN.ADD_PRODUCT} element={<AddProductScreen />} />
-              <Route path={ROUTES.ADMIN.EDIT_PRODUCT} element={<EditProductScreen />} />
+              <Route path={`${ROUTES.ADMIN.EDIT_PRODUCT}/:id`} element={<EditProductScreen />} />
             </Route>
             {/* TODO: Add others guarded routes below this line */}
           </Route>

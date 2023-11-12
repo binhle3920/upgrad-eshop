@@ -10,7 +10,7 @@ const HomeScreen = () => {
   const [selectedProductId, setSelectedProductId] = useState(null);
 
   const { products, removeProduct } = useProducts();
-  const { showSnackbar } = useSnackbar();
+  const { showNotification } = useSnackbar();
 
   const handleShowDeleteDialog = (id) => {
     setIsOpenConfirmDialog(true);
@@ -24,7 +24,7 @@ const HomeScreen = () => {
 
   const handleDeleteProduct = async () => {
     const response = await removeProduct(selectedProductId);
-    showSnackbar(response);
+    showNotification(response);
     handleCloseDeleteDialog();
   }
 

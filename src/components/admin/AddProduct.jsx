@@ -12,12 +12,7 @@ import LockOutlinedIcon from "@mui/icons-material/LockOutlined";
 import CommonButton from "../../common/components/Button";
 import { useProducts } from "../../context/products/products-context";
 import { useSnackbar } from "../../context/snackbar/snackbar-context";
-
-const CATEGORY_OPTIONS = {
-  APPAREL: 'Apparel',
-  ELECTRONICS: 'Electronics',
-  PERSONAL_CARE: 'Personal Care',
-};
+import { CATEGORY_OPTIONS } from "../../utils/constants";
 
 const AddProductScreen = () => {
   const [category, setCategory] = useState(CATEGORY_OPTIONS.APPAREL);
@@ -54,12 +49,6 @@ const AddProductScreen = () => {
   return (
     <Stack justifyContent="center" alignItems="center">
       <Stack direction="column" spacing={2} justifyContent="center" alignItems="center" mt={10} width={400}>
-        <Stack p={1} alignItems="center" bgcolor="#f60157" borderRadius="50%">
-          <LockOutlinedIcon sx={{
-            color: '#ffffff'
-          }} fontSize="large" />
-        </Stack>
-
         <Typography variant="h4" pb={2}>
           Add Product
         </Typography>
