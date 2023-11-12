@@ -4,13 +4,14 @@ import CommonButton from "../../common/components/Button";
 import Footer from "../../common/components/Footer";
 import { useEffect, useState } from "react";
 import { useAuth } from "../../context/auth/auth-context";
-import { ROUTES } from "../../utils/constants";
+import { PHONE_REGEX, ROUTES } from "../../utils/constants";
 import { Link, useNavigate } from "react-router-dom";
 import { useSnackbar } from "../../context/snackbar/snackbar-context";
 
 const SignUpScreen = () => {
   const [isValidPassword, setIsValidPassword] = useState(true);
   const [isValidConfirmPassword, setIsValidConfirmPassword] = useState(true);
+  const [isValidPhoneNumber, setIsValidPhoneNumber] = useState(true);
   const [password, setPassword] = useState('');
 
   const navigate = useNavigate();
@@ -35,6 +36,18 @@ const SignUpScreen = () => {
 
     setPassword(psw);
     setIsValidPassword(isValid);
+  }
+
+  const handleContactNumberChange = (e) => {
+    const contactNumber = e.target.value;
+    const isValid = PHONE_REGEX.test(contactNumber);
+
+    if (contactNumber.length === 0) {
+      setIsValidPhoneNumber(true);
+      return;
+    }
+
+    setIsValidPhoneNumber(isValid);
   }
 
   const handleConfirmPasswordChange = (e) => {
@@ -103,7 +116,17 @@ const SignUpScreen = () => {
               onChange={handleConfirmPasswordChange}
             />
 
-            <TextField id="contactNumber" label="Contact Number" variant="outlined" type="string" required maxLength={255} />
+            <TextField
+              id="contactNumber"
+              label="Contact Number"
+              variant="outlined"
+              type="string"
+              required
+              maxLength={255}
+              error={!isValidPhoneNumber}
+              helperText={!isValidPhoneNumber && "Invalid phone number"}
+              onChange={handleContactNumberChange}
+            />
 
             <Stack pt={2}>
               <CommonButton label="Sign Up" type="submit" />
