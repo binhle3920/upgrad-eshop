@@ -15,7 +15,7 @@ export const USER_ROLES = {
   USER: "USER"
 }
 
-export const API_URL = "http://localhost:8080/api";
+export const API_URL = "https://upgrad-eshop-be-production.up.railway.app/api";
 
 export const AUTO_CLOSE_NOTIFICATIONS_DURATION = 3000; // 3 seconds
 

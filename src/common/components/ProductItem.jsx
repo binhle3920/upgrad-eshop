@@ -36,6 +36,9 @@ const ProductItem = ({ id, imageUrl, name, description, price, onDelete }) => {
           }}
         />
 
+        {name}
+        {description}
+
         <Stack direction="row" justifyContent="space-between" m={2}>
           <CommonButton label="Buy" sx={{
             width: 'fit-content',
