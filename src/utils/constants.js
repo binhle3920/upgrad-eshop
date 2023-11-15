@@ -3,6 +3,7 @@ export const ROUTES = {
   LOGIN: "/login",
   SIGNUP: "/signup",
   PRODUCTS: "/products",
+
   // ADMIN
   ADMIN: {
     ADD_PRODUCT: "/admin/add-product",
