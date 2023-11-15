@@ -1,4 +1,4 @@
-import { IconButton, Paper, Stack } from "@mui/material";
+import { Box, IconButton, Paper, Stack , Typography} from "@mui/material";
 import CommonButton from "./Button";
 import { useAuth } from "../../context/auth/auth-context";
 import { ROUTES, USER_ROLES } from "../../utils/constants";
@@ -23,20 +23,27 @@ const ProductItem = ({ id, imageUrl, name, description, price, onDelete }) => {
   return (
     <Paper elevation={2} sx={{
       width: 400,
-      height: 600,
+      height: 550
     }}>
-      <Stack direction="column" justifyContent="space-between" height="100%">
-        <img
-          src={imageUrl || "https://www.rallis.com/Upload/Images/thumbnail/Product-inside.png"}
-          alt={name}
-          width="100%"
-          height={300}
-          style={{
-            objectFit: "cover",
-          }}
-        />
+      <Stack height="90%" justifyContent="space-between" style={{ backgroundColor: 'white', borderRadius: '8px', padding: '16px' }}>
+        <Stack>
+          <img
+            src={imageUrl || "https://www.rallis.com/Upload/Images/thumbnail/Product-inside.png"}
+            alt={name}
+            width="100%"
+            height={300}
+            style={{ objectFit: "cover", borderRadius: '4px' }}
+          />
 
-        <Stack direction="row" justifyContent="space-between" m={2}>
+          <div style={{ display: 'flex', justifyContent: 'space-between' ,  margin: '8px 0' }}>
+            <Typography variant="h6">{name}</Typography>
+            <Typography variant="h6">₹ {price}</Typography>
+          </div>
+
+          <Typography variant="body1" sx={{color:'grey'}}>{description}</Typography>
+        </Stack>
+
+        <Stack direction="row" justifyContent="space-between"> 
           <CommonButton label="Buy" sx={{
             width: 'fit-content',
           }} />
