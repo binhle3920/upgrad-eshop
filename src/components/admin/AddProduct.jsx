@@ -8,7 +8,6 @@ import {
   TextField,
   Typography
 } from "@mui/material";
-import LockOutlinedIcon from "@mui/icons-material/LockOutlined";
 import CommonButton from "../../common/components/Button";
 import { useProducts } from "../../context/products/products-context";
 import { useSnackbar } from "../../context/snackbar/snackbar-context";
@@ -73,8 +72,8 @@ const AddProductScreen = () => {
               </Select>
             </FormControl>
             <TextField id="manufacturer" label="Manufacturer" variant="outlined" type="text" required maxLength={255} />
-            <TextField id="availableItems" label="Available Items" variant="outlined" type="number" required />
-            <TextField id="price" label="Price" variant="outlined" type="number" required />
+            <TextField id="availableItems" label="Available Items" variant="outlined" type="number" required min={0} />
+            <TextField id="price" label="Price" variant="outlined" type="number" required min={0} />
             <TextField id="imageUrl" label="Image" variant="outlined" type="url" maxLength={255} />
             <TextField id="description" label="Description" variant="outlined" type="text" />
 

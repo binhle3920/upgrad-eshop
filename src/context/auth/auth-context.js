@@ -7,12 +7,14 @@ export const AuthContext = createContext(undefined);
 
 export const useAuthProvider = () => {
   const [user, setUser] = useState(null);
+  const [isLoading, setIsLoading] = useState(false);
 
   useEffect(() => {
     const accessToken = localStorage.getItem('accessToken');
     if (accessToken) {
       const user = convertAccessTokenToUser(accessToken);
       setUser(user);
+      setIsLoading(false);
     }
   }, []);
 
@@ -77,6 +79,7 @@ export const useAuthProvider = () => {
 
   return {
     user,
+    isLoading,
     login: userLogin,
     signup: userSignup,
     logout: userLogout

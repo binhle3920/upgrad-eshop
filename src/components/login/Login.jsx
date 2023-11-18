@@ -7,19 +7,21 @@ import { ROUTES } from "../../utils/constants";
 import { useAuth } from "../../context/auth/auth-context";
 import { Link, useNavigate } from "react-router-dom";
 import { useSnackbar } from "../../context/snackbar/snackbar-context";
+import { useRedirectFromUrl } from "../../hooks/use-redirect-from-url";
 
 const LoginScreen = () => {
   const [isValidPassword, setIsValidPassword] = useState(true);
 
   const navigate = useNavigate();
-  const { user, login } = useAuth();
+  const { user, isLoading, login } = useAuth();
   const { showNotification } = useSnackbar();
+  const redirect = useRedirectFromUrl();
 
   useEffect(() => {
-    if (user) {
-      navigate(ROUTES.HOME);
+    if (user && !isLoading) {
+      redirect();
     }
-  }, [user, navigate]);
+  }, [user, isLoading, navigate]);
 
   const handlePasswordChange = (e) => {
     const password = e.target.value;
