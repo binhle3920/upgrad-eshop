@@ -10,7 +10,7 @@ import AdminGuard from "./common/components/AdminGuard";
 import AddProductScreen from "./components/admin/AddProduct";
 import EditProductScreen from "./components/admin/EditProduct";
 import OrderScreen from "./components/order/Order";
-import ProductDetailScreen from "./components/details/productDetail";
+import ProductDetailScreen from "./components/details/ProductDetail";
 
 const App = () => {
   return (

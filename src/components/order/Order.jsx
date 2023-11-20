@@ -107,7 +107,7 @@ const OrderScreen = () => {
 
   const handlePrevStep = () => {
     if (activeStep === 1) {
-      // TODO: Navigate to product detail screen
+      navigate(`${ROUTES.PRODUCTS}/${product.id}`)
     } else {
       setActiveStep(activeStep - 1);
       setCompletedSteps({

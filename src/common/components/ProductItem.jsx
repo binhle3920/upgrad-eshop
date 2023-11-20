@@ -51,9 +51,15 @@ const ProductItem = ({ id, imageUrl, name, description, price, onDelete }) => {
         </Stack>
 
         <Stack direction="row" justifyContent="space-between">
-          <CommonButton label="Buy" sx={{
-            width: 'fit-content',
-          }} />
+          <CommonButton
+            label="Buy"
+            sx={{
+              width: 'fit-content',
+            }}
+            onClick={() => {
+              navigate(`${ROUTES.PRODUCTS}/${id}`);
+            }}
+          />
 
           {
             isAdmin && (

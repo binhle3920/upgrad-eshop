@@ -5,14 +5,13 @@ import Footer from "../../common/components/Footer";
 import { useEffect, useState } from "react";
 import { ROUTES } from "../../utils/constants";
 import { useAuth } from "../../context/auth/auth-context";
-import { Link, useNavigate } from "react-router-dom";
+import { Link } from "react-router-dom";
 import { useSnackbar } from "../../context/snackbar/snackbar-context";
 import { useRedirectFromUrl } from "../../hooks/use-redirect-from-url";
 
 const LoginScreen = () => {
   const [isValidPassword, setIsValidPassword] = useState(true);
 
-  const navigate = useNavigate();
   const { user, isLoading, login } = useAuth();
   const { showNotification } = useSnackbar();
   const redirect = useRedirectFromUrl();
@@ -21,7 +20,7 @@ const LoginScreen = () => {
     if (user && !isLoading) {
       redirect();
     }
-  }, [user, isLoading, navigate]);
+  }, [user, isLoading, redirect]);
 
   const handlePasswordChange = (e) => {
     const password = e.target.value;
