@@ -9,6 +9,7 @@ import NotFoundScreen from "./components/404/404";
 import AdminGuard from "./common/components/AdminGuard";
 import AddProductScreen from "./components/admin/AddProduct";
 import EditProductScreen from "./components/admin/EditProduct";
+import ProductDetailScreen from "./components/details/productDetail";
 
 const App = () => {
   return (
@@ -17,6 +18,7 @@ const App = () => {
         <Route element={<Layout />}>
           <Route element={<AuthGuard />}>
             <Route path={ROUTES.HOME} element={<HomeScreen />} />
+            <Route path={`${ROUTES.PRODUCTS}/:id`} element={<ProductDetailScreen/>} />
 
             <Route element={<AdminGuard />}>
               <Route path={ROUTES.ADMIN.ADD_PRODUCT} element={<AddProductScreen />} />
