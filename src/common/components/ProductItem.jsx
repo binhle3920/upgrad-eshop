@@ -19,6 +19,7 @@ const ProductItem = ({ id, imageUrl, name, description, price, onDelete }) => {
   const handleEdit = () => {
     navigate(`${ROUTES.ADMIN.EDIT_PRODUCT}/${id}`);
   }
+
   const handleCategoryChange = (event, newCategory) => {
     if (newCategory !== null) {
       //setSelectedCategory(newCategory);
@@ -27,7 +28,6 @@ const ProductItem = ({ id, imageUrl, name, description, price, onDelete }) => {
   }
 
   return (
-<>
     <Paper elevation={2} sx={{
       width: 400,
       height: 550
@@ -50,7 +50,7 @@ const ProductItem = ({ id, imageUrl, name, description, price, onDelete }) => {
           <Typography variant="body1" sx={{color:'grey'}}>{description}</Typography>
         </Stack>
 
-        <Stack direction="row" justifyContent="space-between"> 
+        <Stack direction="row" justifyContent="space-between">
           <CommonButton label="Buy" sx={{
             width: 'fit-content',
           }} />
@@ -71,7 +71,6 @@ const ProductItem = ({ id, imageUrl, name, description, price, onDelete }) => {
         </Stack>
       </Stack>
     </Paper>
-    </>
   )
 }
 
