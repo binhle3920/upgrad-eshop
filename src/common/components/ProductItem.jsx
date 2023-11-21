@@ -25,8 +25,9 @@ const ProductItem = ({id, imageUrl, name, description, price, onDelete}) => {
       width: 400,
       height: 550
     }}>
-      <Stack height="90%" justifyContent="space-between"
-             style={{backgroundColor: 'white', borderRadius: '8px', padding: '16px'}}>
+      <Stack
+        height="100%" justifyContent="space-between"
+        style={{backgroundColor: 'white', borderRadius: '8px'}}>
         <Stack>
           <img
             src={imageUrl || "https://www.rallis.com/Upload/Images/thumbnail/Product-inside.png"}
@@ -36,15 +37,44 @@ const ProductItem = ({id, imageUrl, name, description, price, onDelete}) => {
             style={{objectFit: "cover", borderRadius: '4px'}}
           />
 
-          <div style={{display: 'flex', justifyContent: 'space-between', margin: '8px 0'}}>
-            <Typography variant="h6">{name}</Typography>
-            <Typography variant="h6">₹ {price}</Typography>
+          <div
+            style={{
+              display: 'flex',
+              justifyContent: 'space-between',
+              margin: '8px 0',
+              gap: '8px',
+              paddingLeft: '16px',
+              paddingRight: '16px'
+          }}>
+            <Typography
+              variant="h6"
+              sx={{
+                display: '-webkit-box',
+                overflow: 'hidden',
+                WebkitBoxOrient: 'vertical',
+                WebkitLineClamp: 2,
+              }}
+            >
+              {name}
+            </Typography>
+            <Typography variant="h6" sx={{ whiteSpace: 'nowrap' }}>₹ {price}</Typography>
           </div>
 
-          <Typography variant="body1" sx={{color: 'grey'}}>{description}</Typography>
+          <Typography
+            variant="body1"
+            sx={{
+              color: 'grey', display: '-webkit-box',
+              overflow: 'hidden',
+              WebkitBoxOrient: 'vertical',
+              WebkitLineClamp: 3
+            }}
+            px={2}
+          >
+            {description}
+          </Typography>
         </Stack>
 
-        <Stack direction="row" justifyContent="space-between">
+        <Stack direction="row" justifyContent="space-between" p={2}>
           <CommonButton
             label="Buy"
             sx={{
