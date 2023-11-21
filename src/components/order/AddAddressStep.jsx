@@ -12,6 +12,7 @@ const AddAddressStep = ({ onChangeAddress }) => {
     getAddresses().then(async (response) => {
       setAddresses(await response.json());
     });
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   const handleAddAddress = (address) => {

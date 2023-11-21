@@ -71,3 +71,15 @@ export const modifyProduct = async (productId, { name, category, price, descript
     }
   )
 }
+
+export const getProductCategories = async () => {
+  return await fetch(
+    `${API_URL}/products/categories`,
+    {
+      method: "GET",
+      headers: {
+        "Content-Type": "application/json",
+      },
+    }
+  );
+}

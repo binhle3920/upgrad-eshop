@@ -38,6 +38,9 @@ const EditProductScreen = () => {
       case 'name':
         setName(value);
         break;
+      case 'category':
+        setCategory(value);
+        break;
       case 'manufacturer':
         setManufacturer(value);
         break;

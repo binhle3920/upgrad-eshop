@@ -1,16 +1,27 @@
 import { useProducts } from "../../context/products/products-context";
-import { Box , Stack, ToggleButtonGroup, ToggleButton} from "@mui/material";
+import { Box, Stack, ToggleButtonGroup, ToggleButton, Select, FormControl, InputLabel, MenuItem } from "@mui/material";
 import ProductItem from "../../common/components/ProductItem";
 import ConfirmDialog from "../../common/components/ConfirmDialog";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useSnackbar } from "../../context/snackbar/snackbar-context";
+import { getProductCategories } from "../../api/product";
 
 const HomeScreen = () => {
   const [isOpenConfirmDialog, setIsOpenConfirmDialog] = useState(false);
   const [selectedProductId, setSelectedProductId] = useState(null);
+  const [categories, setCategories] = useState(['All']);
+  const [selectedCategory, setSelectedCategory] = useState('All');
+  const [selectedSort, setSelectedSort] = useState('default');
 
-  const { products, removeProduct } = useProducts();
+  const { products, removeProduct, filterProducts, sortProducts } = useProducts();
   const { showNotification } = useSnackbar();
+
+  useEffect(() => {
+    getProductCategories().then(async (response) => {
+      const list = await response.json();
+      setCategories(['All', ...list]);
+    });
+  }, []);
 
   const handleShowDeleteDialog = (id) => {
     setIsOpenConfirmDialog(true);
@@ -22,6 +33,16 @@ const HomeScreen = () => {
     setSelectedProductId(null);
   }
 
+  const handleCategoryChange = (e, value) => {
+    setSelectedCategory(value);
+    filterProducts(value);
+  }
+
+  const handleSortChange = (e, child) => {
+    setSelectedSort(child.props.value);
+    sortProducts(child.props.value);
+  }
+
   const handleDeleteProduct = async () => {
     const response = await removeProduct(selectedProductId);
     showNotification(response);
@@ -30,39 +51,47 @@ const HomeScreen = () => {
 
   return (
     <>
-    <Stack alignItems="center" justifyContent="center">
-    <ToggleButtonGroup
-    //value={selectedCategory}
-    exclusive
-    //onChange={handleCategoryChange}
-    aria-label="category"
-    size="large"
-    sx={{ marginTop: 2, marginLeft: 2 }}
-  >
-    <ToggleButton value="All" aria-label="All">
-      ALL
-    </ToggleButton>
-    <ToggleButton value="Apparel" aria-label="Apparel">
-      APPAREL
-    </ToggleButton>
-    <ToggleButton value="Electronics" aria-label="Electronics">
-      ELECTRONICS
-    </ToggleButton>
-    <ToggleButton value="Footwear" aria-label="Footwear">
-      FOOTWEAR
-    </ToggleButton>
-    <ToggleButton value="PersonalCare" aria-label="PersonalCare">
-      PERSONAL CARE
-    </ToggleButton>
-  </ToggleButtonGroup>
-  </Stack>
-    <Box p={4}>
-     <Stack direction='row' justifyContent="space-evenly" sx={{flexWrap:'wrap', rowGap:5 , columnGap:5}}> {
-        products.map(product => (
-          <ProductItem key={product.id} {...product} onDelete={handleShowDeleteDialog} />
-        ))
-      }
-    </Stack>
+      <Stack alignItems="center" justifyContent="center">
+        <ToggleButtonGroup
+          value={selectedCategory}
+          exclusive
+          onChange={handleCategoryChange}
+          aria-label="category"
+          size="large"
+          sx={{ marginTop: 4 }}
+        >
+          {categories.map((category) => (
+            <ToggleButton key={category} value={category} aria-label={category} sx={{ textTransform: 'uppercase' }}>
+              {category}
+            </ToggleButton>
+          ))}
+        </ToggleButtonGroup>
+      </Stack>
+
+      <Box p={4}>
+        <FormControl sx={{ width: 500, ml: 5, mb: 5 }}>
+          <InputLabel id="sort-label">Sort By</InputLabel>
+          <Select
+            labelId="sort-label"
+            id="sort"
+            value={selectedSort}
+            label="Sort By:"
+            onChange={handleSortChange}
+          >
+            <MenuItem value="default">Default</MenuItem>
+            <MenuItem value="priceDesc">Price: High to Low</MenuItem>
+            <MenuItem value="priceAsc">Price: Low to High</MenuItem>
+            <MenuItem value="newest">Newest</MenuItem>
+          </Select>
+        </FormControl>
+
+        <Stack direction='row' justifyContent="space-evenly" sx={{flexWrap:'wrap', rowGap:5 , columnGap:5}}>
+          {products.map(product => (
+            <ProductItem key={product.id} {...product} onDelete={handleShowDeleteDialog} />
+          ))}
+        </Stack>
+      </Box>
+
       <ConfirmDialog
         open={isOpenConfirmDialog}
         onClose={handleCloseDeleteDialog}
@@ -70,7 +99,6 @@ const HomeScreen = () => {
         description="Are you sure you want to delete the product?"
         onSubmit={handleDeleteProduct}
       />
-    </Box>
     </>
   )
 }
