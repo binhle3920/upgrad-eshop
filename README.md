@@ -2,6 +2,21 @@
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
+## 🚒 Deployments
+
+You can easily run the application by clicking on the following links:
+
+Frontend Application: https://655c6dfff400a6577d0670ab--adorable-brioche-25cdeb.netlify.app/
+
+### Credential
+
+- Login as a user, you can simply register a new account.
+- Login as an admin, using the following credentials below
+
+```
+- Email: admin@gmail.com
+- Password: adminn
+```
 ## Available Scripts
 
 In the project directory, you can run:
