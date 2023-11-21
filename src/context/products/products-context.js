@@ -6,6 +6,8 @@ export const ProductsContext = createContext(undefined);
 export const useProductsProvider = () => {
   const [products, setProducts] = useState([]);
   const [filteredProducts, setFilteredProducts] = useState([]);
+  const [search, setSearch] = useState('');
+  const [category, setCategory] = useState('All');
 
   useEffect(() => {
     fetchProducts();
@@ -85,10 +87,28 @@ export const useProductsProvider = () => {
   }
 
   const filterProducts = (category) => {
-    if (category === 'All') {
+    setCategory(category);
+
+    if (search !== '' && category !== 'All') {
+      const categoryFilteredProducts = products.filter(product => product.category === category);
+      const searchFilteredProducts = categoryFilteredProducts.filter(
+        product =>
+          product.name.toLowerCase().includes(search.toLowerCase()) || product.description?.toLowerCase().includes(search.toLowerCase())
+      );
+
+      setFilteredProducts(searchFilteredProducts);
+    } else if (search !== '') {
+      const searchFilteredProducts = products.filter(
+        product =>
+          product.name.toLowerCase().includes(search.toLowerCase()) || product.description?.toLowerCase().includes(search.toLowerCase())
+      );
+
+      setFilteredProducts(searchFilteredProducts);
+    } else if (category === 'All' && search === '') {
       setFilteredProducts(products);
-    } else {
-      setFilteredProducts(products.filter(product => product.category === category));
+    } else if (category !== 'All' && search === '') {
+      const categoryFilteredProducts = products.filter(product => product.category === category);
+      setFilteredProducts(categoryFilteredProducts);
     }
   }
 
@@ -104,10 +124,39 @@ export const useProductsProvider = () => {
     }
   }
 
+  const searchProducts = (search) => {
+    setSearch(search);
+
+    if (search !== '' && category !== 'All') {
+      const categoryFilteredProducts = products.filter(product => product.category === category);
+      const searchFilteredProducts = categoryFilteredProducts.filter(
+        product =>
+          product.name.toLowerCase().includes(search.toLowerCase()) || product.description?.toLowerCase().includes(search.toLowerCase())
+      );
+
+      setFilteredProducts(searchFilteredProducts);
+    } else if (search !== '') {
+      const searchFilteredProducts = products.filter(
+        product =>
+          product.name.toLowerCase().includes(search.toLowerCase()) || product.description?.toLowerCase().includes(search.toLowerCase())
+      );
+
+      setFilteredProducts(searchFilteredProducts);
+    } else if (category === 'All' && search === '') {
+      setFilteredProducts(products);
+    } else if (category !== 'All' && search === '') {
+      const categoryFilteredProducts = products.filter(product => product.category === category);
+      setFilteredProducts(categoryFilteredProducts);
+    }
+  }
+
+
+
   return {
     products: filteredProducts,
     filterProducts,
     sortProducts,
+    searchProducts,
     addProduct: add,
     modifyProduct: modify,
     removeProduct: remove

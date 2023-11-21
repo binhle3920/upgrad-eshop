@@ -5,9 +5,11 @@ import { Search, SearchIconWrapper, StyledInputBase } from "./Search";
 import SearchIcon from '@mui/icons-material/Search';
 import { ROUTES, USER_ROLES } from "../../utils/constants";
 import { Link } from "react-router-dom";
+import { useProducts } from "../../context/products/products-context";
 
 const Header = () => {
   const {user, logout} = useAuth();
+  const {searchProducts} = useProducts();
 
   const isUserLoggedIn = !!user;
   const isAdmin = user?.roles?.includes(USER_ROLES.ADMIN);
@@ -35,6 +37,10 @@ const Header = () => {
               <StyledInputBase
                 placeholder="Search…"
                 inputProps={{'aria-label': 'search'}}
+                onChange={(e) => {
+                  e.preventDefault();
+                  searchProducts(e.target.value);
+                }}
               />
             </Search>
           )}
