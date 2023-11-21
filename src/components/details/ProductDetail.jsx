@@ -7,9 +7,9 @@ import { useSnackbar } from "../../context/snackbar/snackbar-context";
 import CommonButton from "../../common/components/Button";
 
 const ProductDetailScreen = () => {
-  const { id } = useParams();
+  const {id} = useParams();
   const navigate = useNavigate();
-  const { showNotification } = useSnackbar();
+  const {showNotification} = useSnackbar();
 
   const [product, setProduct] = useState(null);
   const [quantity, setQuantity] = useState();
@@ -37,15 +37,16 @@ const ProductDetailScreen = () => {
   if (!product) {
     return (
       <Stack width="100%" justifyContent="center" alignItems="center" mt={20}>
-        <CircularProgress />
+        <CircularProgress/>
       </Stack>
     );
   }
 
-  return(
+  return (
     <Stack direction="row" spacing={10} mt={20} justifyContent="center" alignItems="flex-start">
       <Stack>
-        <img src={product.imageUrl || "https://www.rallis.com/Upload/Images/thumbnail/Product-inside.png"} width="500" alt={product.name} />
+        <img src={product.imageUrl || "https://www.rallis.com/Upload/Images/thumbnail/Product-inside.png"} width="500"
+             alt={product.name}/>
       </Stack>
 
       <Stack>
@@ -75,14 +76,14 @@ const ProductDetailScreen = () => {
           variant="outlined"
           required
           type="number"
-          sx={{ mt: 4 }}
-          InputProps={{ inputProps: { min: 0 }}}
+          sx={{mt: 4}}
+          InputProps={{inputProps: {min: 0}}}
         />
 
         <CommonButton
           label="Place Order"
           disabled={!quantity || quantity > product.availableItems}
-          sx={{ mt: 4, width: 'fit-content' }}
+          sx={{mt: 4, width: 'fit-content'}}
           onClick={() => navigate(`${ROUTES.ORDER}?productId=${product.id}&quantity=${quantity}`)}
         />
       </Stack>

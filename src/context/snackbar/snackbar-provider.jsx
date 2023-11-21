@@ -1,7 +1,7 @@
 import { SnackbarContext, useSnackbarProvider } from "./snackbar-context";
 
 const SnackbarProvider = (props) => {
-  const { children } = props;
+  const {children} = props;
 
   const snackbar = useSnackbarProvider();
 

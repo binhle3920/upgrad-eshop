@@ -1,5 +1,5 @@
 import { useProducts } from "../../context/products/products-context";
-import { Box, Stack, ToggleButtonGroup, ToggleButton, Select, FormControl, InputLabel, MenuItem } from "@mui/material";
+import { Box, FormControl, InputLabel, MenuItem, Select, Stack, ToggleButton, ToggleButtonGroup } from "@mui/material";
 import ProductItem from "../../common/components/ProductItem";
 import ConfirmDialog from "../../common/components/ConfirmDialog";
 import { useEffect, useState } from "react";
@@ -13,8 +13,8 @@ const HomeScreen = () => {
   const [selectedCategory, setSelectedCategory] = useState('All');
   const [selectedSort, setSelectedSort] = useState('default');
 
-  const { products, removeProduct, filterProducts, sortProducts } = useProducts();
-  const { showNotification } = useSnackbar();
+  const {products, removeProduct, filterProducts, sortProducts} = useProducts();
+  const {showNotification} = useSnackbar();
 
   useEffect(() => {
     getProductCategories().then(async (response) => {
@@ -58,10 +58,10 @@ const HomeScreen = () => {
           onChange={handleCategoryChange}
           aria-label="category"
           size="large"
-          sx={{ marginTop: 4 }}
+          sx={{marginTop: 4}}
         >
           {categories.map((category) => (
-            <ToggleButton key={category} value={category} aria-label={category} sx={{ textTransform: 'uppercase' }}>
+            <ToggleButton key={category} value={category} aria-label={category} sx={{textTransform: 'uppercase'}}>
               {category}
             </ToggleButton>
           ))}
@@ -69,7 +69,7 @@ const HomeScreen = () => {
       </Stack>
 
       <Box p={4}>
-        <FormControl sx={{ width: 500, ml: 5, mb: 5 }}>
+        <FormControl sx={{width: 500, ml: 5, mb: 5}}>
           <InputLabel id="sort-label">Sort By</InputLabel>
           <Select
             labelId="sort-label"
@@ -85,9 +85,9 @@ const HomeScreen = () => {
           </Select>
         </FormControl>
 
-        <Stack direction='row' justifyContent="space-evenly" sx={{flexWrap:'wrap', rowGap:5 , columnGap:5}}>
+        <Stack direction='row' justifyContent="space-evenly" sx={{flexWrap: 'wrap', rowGap: 5, columnGap: 5}}>
           {products.map(product => (
-            <ProductItem key={product.id} {...product} onDelete={handleShowDeleteDialog} />
+            <ProductItem key={product.id} {...product} onDelete={handleShowDeleteDialog}/>
           ))}
         </Stack>
       </Box>

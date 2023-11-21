@@ -5,8 +5,8 @@ import { useEffect } from "react";
 import { CircularProgress, Stack } from "@mui/material";
 
 const AuthGuard = () => {
-  const { user, isLoading } = useAuth();
-  const { pathname, search } = useLocation();
+  const {user, isLoading} = useAuth();
+  const {pathname, search} = useLocation();
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -22,12 +22,12 @@ const AuthGuard = () => {
   if (isLoading) {
     return (
       <Stack width="100vh" height="100vh">
-        <CircularProgress />
+        <CircularProgress/>
       </Stack>
     )
   }
 
-  return <Outlet />;
+  return <Outlet/>;
 };
 
 export default AuthGuard;

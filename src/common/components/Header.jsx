@@ -1,13 +1,13 @@
-import {AppBar, Button, Stack, Toolbar, Typography} from "@mui/material";
-import {ShoppingCart} from "@mui/icons-material";
-import {useAuth} from "../../context/auth/auth-context";
-import {Search, SearchIconWrapper, StyledInputBase} from "./Search";
+import { AppBar, Button, Stack, Toolbar, Typography } from "@mui/material";
+import { ShoppingCart } from "@mui/icons-material";
+import { useAuth } from "../../context/auth/auth-context";
+import { Search, SearchIconWrapper, StyledInputBase } from "./Search";
 import SearchIcon from '@mui/icons-material/Search';
 import { ROUTES, USER_ROLES } from "../../utils/constants";
 import { Link } from "react-router-dom";
 
 const Header = () => {
-  const { user, logout } = useAuth();
+  const {user, logout} = useAuth();
 
   const isUserLoggedIn = !!user;
   const isAdmin = user?.roles?.includes(USER_ROLES.ADMIN);
@@ -16,11 +16,11 @@ const Header = () => {
     <AppBar component="nav" position="sticky" px="md" sx={{
       backgroundColor: "#3f51b5",
     }}>
-      <Toolbar disableGutters sx={{ px: 4 }}>
+      <Toolbar disableGutters sx={{px: 4}}>
         <Stack direction="row" justifyContent="space-between" width="100%" alignItems="center">
           <Link to={ROUTES.HOME}>
             <Stack spacing={1} direction="row" alignItems="center">
-              <ShoppingCart />
+              <ShoppingCart/>
               <Typography variant="h6" noWrap>
                 upGrad E-Shop
               </Typography>
@@ -30,11 +30,11 @@ const Header = () => {
           {isUserLoggedIn && (
             <Search>
               <SearchIconWrapper>
-                <SearchIcon />
+                <SearchIcon/>
               </SearchIconWrapper>
               <StyledInputBase
                 placeholder="Search…"
-                inputProps={{ 'aria-label': 'search' }}
+                inputProps={{'aria-label': 'search'}}
               />
             </Search>
           )}

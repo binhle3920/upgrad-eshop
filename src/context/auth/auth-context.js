@@ -1,4 +1,4 @@
-import { useState, createContext, useContext, useEffect } from "react";
+import { createContext, useContext, useEffect, useState } from "react";
 import { login, signUp } from "../../api/auth";
 import { removeAccessToken, removeRoles, saveAccessToken, saveRoles } from "../../common/services/auth";
 import { convertAccessTokenToUser } from "../../utils/helpers";
@@ -30,11 +30,11 @@ export const useAuthProvider = () => {
       }
 
       if (response.status === 200) {
-        const { token, roles } = await response.json();
+        const {token, roles} = await response.json();
 
         saveAccessToken(token);
         saveRoles(`${roles}`);
-        setUser({ username, roles });
+        setUser({username, roles});
 
         return {
           message: 'Login successful',
@@ -51,11 +51,11 @@ export const useAuthProvider = () => {
     }
   }
 
-  const userSignup = async ({ firstName, lastName, email, contactNumber, password }) => {
+  const userSignup = async ({firstName, lastName, email, contactNumber, password}) => {
     try {
       const response = await signUp({firstName, lastName, email, contactNumber, password})
       const isSuccessful = response.status === 200;
-      const { message } = await response.json();
+      const {message} = await response.json();
 
       return {
         message,

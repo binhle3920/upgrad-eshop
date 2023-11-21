@@ -1,13 +1,5 @@
 import { useState } from "react";
-import {
-  FormControl,
-  InputLabel,
-  MenuItem,
-  Select,
-  Stack,
-  TextField,
-  Typography
-} from "@mui/material";
+import { FormControl, InputLabel, MenuItem, Select, Stack, TextField, Typography } from "@mui/material";
 import CommonButton from "../../common/components/Button";
 import { useProducts } from "../../context/products/products-context";
 import { useSnackbar } from "../../context/snackbar/snackbar-context";
@@ -16,8 +8,8 @@ import { CATEGORY_OPTIONS } from "../../utils/constants";
 const AddProductScreen = () => {
   const [category, setCategory] = useState(CATEGORY_OPTIONS.APPAREL);
 
-  const { addProduct } = useProducts();
-  const { showNotification } = useSnackbar();
+  const {addProduct} = useProducts();
+  const {showNotification} = useSnackbar();
 
   const handleCategoryChange = (e) => {
     setCategory(e.target.value);
@@ -56,7 +48,7 @@ const AddProductScreen = () => {
           width: '100%',
         }}>
           <Stack direction="column" spacing={2} width="100%">
-            <TextField id="name" label="Name" variant="outlined" type="text" required maxLength={255} />
+            <TextField id="name" label="Name" variant="outlined" type="text" required maxLength={255}/>
 
             <FormControl id="category">
               <InputLabel id="category-label">Category</InputLabel>
@@ -71,26 +63,26 @@ const AddProductScreen = () => {
                 <MenuItem value={CATEGORY_OPTIONS.PERSONAL_CARE}>Personal Care</MenuItem>
               </Select>
             </FormControl>
-            <TextField id="manufacturer" label="Manufacturer" variant="outlined" type="text" required maxLength={255} />
+            <TextField id="manufacturer" label="Manufacturer" variant="outlined" type="text" required maxLength={255}/>
             <TextField
               id="availableItems"
               label="Available Items"
               variant="outlined"
               type="number"
-              InputProps={{ inputProps: { min: 0 }}}
-              required />
+              InputProps={{inputProps: {min: 0}}}
+              required/>
             <TextField
               id="price"
               label="Price"
               variant="outlined"
               type="number"
-              InputProps={{ inputProps: { min: 0 }}}
-              required />
-            <TextField id="imageUrl" label="Image" variant="outlined" type="url" maxLength={255} />
-            <TextField id="description" label="Description" variant="outlined" type="text" />
+              InputProps={{inputProps: {min: 0}}}
+              required/>
+            <TextField id="imageUrl" label="Image" variant="outlined" type="url" maxLength={255}/>
+            <TextField id="description" label="Description" variant="outlined" type="text"/>
 
             <Stack pt={2}>
-              <CommonButton label="Save Product" type="submit" />
+              <CommonButton label="Save Product" type="submit"/>
             </Stack>
           </Stack>
         </form>

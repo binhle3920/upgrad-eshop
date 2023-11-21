@@ -16,9 +16,9 @@ const EditProductScreen = () => {
   const [imageUrl, setImageUrl] = useState('');
   const [description, setDescription] = useState('');
 
-  const { id } = useParams();
-  const { modifyProduct } = useProducts();
-  const { showNotification } = useSnackbar();
+  const {id} = useParams();
+  const {modifyProduct} = useProducts();
+  const {showNotification} = useSnackbar();
 
   useEffect(() => {
     getProduct(id).then(async (response) => {
@@ -148,7 +148,7 @@ const EditProductScreen = () => {
               label="Image"
               variant="outlined"
               type="url"
-              maxLength={255} />
+              maxLength={255}/>
             <TextField
               value={description}
               onChange={(e) => handleChange('description', e.target.value)}
@@ -159,7 +159,7 @@ const EditProductScreen = () => {
             />
 
             <Stack pt={2}>
-              <CommonButton label="Modify Product" type="submit" />
+              <CommonButton label="Modify Product" type="submit"/>
             </Stack>
           </Stack>
         </form>

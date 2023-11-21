@@ -1,4 +1,4 @@
-import { Typography, Box } from "@mui/material";
+import { Box, Typography } from "@mui/material";
 
 const NotFoundScreen = () => {
   return (
@@ -10,7 +10,8 @@ const NotFoundScreen = () => {
       justifyContent: "center",
     }}>
       <Typography variant="h1">404 Not Found</Typography>
-      <Typography variant="subtitle1">The page you are looking for does not exist, or you do not have permission to access it.</Typography>
+      <Typography variant="subtitle1">The page you are looking for does not exist, or you do not have permission to
+        access it.</Typography>
     </Box>
   )
 }

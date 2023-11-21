@@ -1,7 +1,7 @@
 import { Button } from "@mui/material";
 
 export const CommonButton = (props) => {
-  const { label, sx, ...rest } = props;
+  const {label, sx, ...rest} = props;
   return (
     <Button
       variant="contained"

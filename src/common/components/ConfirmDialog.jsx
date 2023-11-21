@@ -1,6 +1,6 @@
-import { Dialog, DialogTitle, DialogContent, DialogContentText, DialogActions, Button } from "@mui/material";
+import { Button, Dialog, DialogActions, DialogContent, DialogContentText, DialogTitle } from "@mui/material";
 
-const ConfirmDialog = ({ open, onClose, title, description, onSubmit }) => {
+const ConfirmDialog = ({open, onClose, title, description, onSubmit}) => {
   return (
     <Dialog
       open={open}

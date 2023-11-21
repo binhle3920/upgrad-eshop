@@ -1,7 +1,7 @@
 import { ProductsContext, useProductsProvider } from "./products-context";
 
 const ProductsProvider = (props) => {
-  const { children } = props;
+  const {children} = props;
 
   const products = useProductsProvider();
 

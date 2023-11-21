@@ -1,7 +1,7 @@
 import { getAccessToken } from "../common/services/auth";
 import { API_URL } from "../utils/constants";
 
-export const addOrder = async ({ quantity, addressId, productId }) => {
+export const addOrder = async ({quantity, addressId, productId}) => {
   const accessToken = getAccessToken();
 
   return await fetch(
@@ -12,7 +12,7 @@ export const addOrder = async ({ quantity, addressId, productId }) => {
         "Content-Type": "application/json",
         "Authorization": `Bearer ${accessToken}`
       },
-      body: JSON.stringify({ quantity, address: addressId, product: productId }),
+      body: JSON.stringify({quantity, address: addressId, product: productId}),
     }
   );
 }

@@ -5,10 +5,10 @@ import { Stack, TextField, Typography } from "@mui/material";
 import CommonButton from "./Button";
 import { addAddress } from "../../api/address";
 
-const AddAddress = ({ onAddAddress }) => {
+const AddAddress = ({onAddAddress}) => {
   const [isValidPhoneNumber, setIsValidPhoneNumber] = useState(true);
 
-  const { showNotification } = useSnackbar();
+  const {showNotification} = useSnackbar();
 
   const handleContactNumberChange = (e) => {
     const contactNumber = e.target.value;
@@ -62,7 +62,7 @@ const AddAddress = ({ onAddAddress }) => {
           width: '100%',
         }}>
           <Stack direction="column" spacing={2} width="100%">
-            <TextField id="name" label="Name" variant="outlined" type="text" required maxLength={255} />
+            <TextField id="name" label="Name" variant="outlined" type="text" required maxLength={255}/>
             <TextField
               id="contactNumber"
               label="Contact Number"
@@ -75,14 +75,14 @@ const AddAddress = ({ onAddAddress }) => {
               onChange={handleContactNumberChange}
             />
 
-            <TextField id="street" label="Street" variant="outlined" type="text" required maxLength={255} />
-            <TextField id="city" label="City" variant="outlined" type="text" required maxLength={255} />
-            <TextField id="state" label="State" variant="outlined" type="text" required maxLength={255} />
-            <TextField id="landmark" label="Landmark" variant="outlined" type="text" maxLength={255} />
+            <TextField id="street" label="Street" variant="outlined" type="text" required maxLength={255}/>
+            <TextField id="city" label="City" variant="outlined" type="text" required maxLength={255}/>
+            <TextField id="state" label="State" variant="outlined" type="text" required maxLength={255}/>
+            <TextField id="landmark" label="Landmark" variant="outlined" type="text" maxLength={255}/>
             <TextField id="zipcode" label="Zipcode" variant="outlined" type="text" required maxLength={255}/>
 
             <Stack pt={2}>
-              <CommonButton label="Save Address" type="submit" />
+              <CommonButton label="Save Address" type="submit"/>
             </Stack>
           </Stack>
         </form>

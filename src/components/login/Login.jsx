@@ -1,4 +1,4 @@
-import { Box, Stack, Typography, TextField } from "@mui/material";
+import { Box, Stack, TextField, Typography } from "@mui/material";
 import LockOutlinedIcon from '@mui/icons-material/LockOutlined';
 import CommonButton from "../../common/components/Button";
 import Footer from "../../common/components/Footer";
@@ -12,8 +12,8 @@ import { useRedirectFromUrl } from "../../hooks/use-redirect-from-url";
 const LoginScreen = () => {
   const [isValidPassword, setIsValidPassword] = useState(true);
 
-  const { user, isLoading, login } = useAuth();
-  const { showNotification } = useSnackbar();
+  const {user, isLoading, login} = useAuth();
+  const {showNotification} = useSnackbar();
   const redirect = useRedirectFromUrl();
 
   useEffect(() => {
@@ -50,7 +50,7 @@ const LoginScreen = () => {
         <Stack p={1} alignItems="center" bgcolor="#f60157" borderRadius="50%">
           <LockOutlinedIcon sx={{
             color: '#ffffff'
-          }} fontSize="large" />
+          }} fontSize="large"/>
         </Stack>
 
         <Typography variant="h4" pb={2}>
@@ -61,7 +61,7 @@ const LoginScreen = () => {
           width: '100%',
         }}>
           <Stack direction="column" spacing={2} width="100%">
-            <TextField id="username" label="Email Address" variant="outlined" type="email" required />
+            <TextField id="username" label="Email Address" variant="outlined" type="email" required/>
             <TextField
               id="password"
               label="Password"
@@ -74,7 +74,7 @@ const LoginScreen = () => {
             />
 
             <Stack pt={2}>
-              <CommonButton label="Sign In" type="submit" />
+              <CommonButton label="Sign In" type="submit"/>
             </Stack>
           </Stack>
         </form>
@@ -88,7 +88,7 @@ const LoginScreen = () => {
         </Link>
 
         <Box pt={4}>
-          <Footer />
+          <Footer/>
         </Box>
       </Stack>
     </Stack>

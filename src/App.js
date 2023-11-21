@@ -1,4 +1,4 @@
-import {BrowserRouter, Route, Routes} from "react-router-dom";
+import { BrowserRouter, Route, Routes } from "react-router-dom";
 import Layout from "./common/components/Layout";
 import AuthGuard from "./common/components/AuthGuard";
 import { ROUTES } from "./utils/constants";
@@ -16,23 +16,23 @@ const App = () => {
   return (
     <BrowserRouter>
       <Routes>
-        <Route element={<Layout />}>
-          <Route element={<AuthGuard />}>
-            <Route path={ROUTES.HOME} element={<HomeScreen />} />
-            <Route path={ROUTES.ORDER} element={<OrderScreen />} />
-            <Route path={`${ROUTES.PRODUCTS}/:id`} element={<ProductDetailScreen/>} />
+        <Route element={<Layout/>}>
+          <Route element={<AuthGuard/>}>
+            <Route path={ROUTES.HOME} element={<HomeScreen/>}/>
+            <Route path={ROUTES.ORDER} element={<OrderScreen/>}/>
+            <Route path={`${ROUTES.PRODUCTS}/:id`} element={<ProductDetailScreen/>}/>
 
-            <Route element={<AdminGuard />}>
-              <Route path={ROUTES.ADMIN.ADD_PRODUCT} element={<AddProductScreen />} />
-              <Route path={`${ROUTES.ADMIN.EDIT_PRODUCT}/:id`} element={<EditProductScreen />} />
+            <Route element={<AdminGuard/>}>
+              <Route path={ROUTES.ADMIN.ADD_PRODUCT} element={<AddProductScreen/>}/>
+              <Route path={`${ROUTES.ADMIN.EDIT_PRODUCT}/:id`} element={<EditProductScreen/>}/>
             </Route>
             {/* TODO: Add others guarded routes below this line */}
           </Route>
 
-          <Route path={ROUTES.LOGIN} element={<LoginScreen />} />
-          <Route path={ROUTES.SIGNUP} element={<SignUpScreen />} />
+          <Route path={ROUTES.LOGIN} element={<LoginScreen/>}/>
+          <Route path={ROUTES.SIGNUP} element={<SignUpScreen/>}/>
 
-          <Route path="*" element={<NotFoundScreen />} />
+          <Route path="*" element={<NotFoundScreen/>}/>
         </Route>
       </Routes>
     </BrowserRouter>

@@ -1,7 +1,7 @@
-import { useAuthProvider, AuthContext } from "./auth-context";
+import { AuthContext, useAuthProvider } from "./auth-context";
 
 const AuthProvider = (props) => {
-  const { children } = props;
+  const {children} = props;
 
   const auth = useAuthProvider();
 

@@ -1,12 +1,6 @@
 import { useEffect, useState } from "react";
 import { useNavigate, useSearchParams } from "react-router-dom";
-import {
-  Button,
-  Stack,
-  Step,
-  StepLabel,
-  Stepper,
-} from "@mui/material";
+import { Button, Stack, Step, StepLabel, Stepper, } from "@mui/material";
 import CommonButton from "../../common/components/Button";
 import { ROUTES } from "../../utils/constants";
 import { useSnackbar } from "../../context/snackbar/snackbar-context";
@@ -17,10 +11,10 @@ import { addOrder } from "../../api/order";
 
 const STEP_LABELS = ['Items', 'Select Address', 'Place order'];
 
-const ActionStep = ({ isLastStep, onNextStep, onPrevStep }) => {
+const ActionStep = ({isLastStep, onNextStep, onPrevStep}) => {
   return (
     <Stack direction="row" spacing="10">
-      <Button onClick={onPrevStep} variant="text" sx={{ color: "gray", mr: "20px !important" }}>
+      <Button onClick={onPrevStep} variant="text" sx={{color: "gray", mr: "20px !important"}}>
         Back
       </Button>
       <CommonButton onClick={onNextStep} label={isLastStep ? 'Place order' : 'Next'}/>
@@ -38,7 +32,7 @@ const OrderScreen = () => {
 
   const navigate = useNavigate();
   const [searchParams] = useSearchParams();
-  const { showNotification } = useSnackbar();
+  const {showNotification} = useSnackbar();
 
   const productId = searchParams.get('productId');
   const quantity = parseInt(searchParams.get('quantity'));
@@ -69,7 +63,7 @@ const OrderScreen = () => {
 
   const handleNextStep = () => {
     if (activeStep === 2) {
-      addOrder({ quantity, productId: product.id, addressId: address.id }).then(async (response) => {
+      addOrder({quantity, productId: product.id, addressId: address.id}).then(async (response) => {
         if (response.status === 201) {
           showNotification({
             message: 'Order placed successfully!',
@@ -119,7 +113,7 @@ const OrderScreen = () => {
 
   return (
     <Stack justifyContent="center" py={5} alignItems="center" width="100%" spacing={5}>
-      <Stepper activeStep={activeStep} sx={{ width: "90%" }} d>
+      <Stepper activeStep={activeStep} sx={{width: "90%"}} d>
         {STEP_LABELS.map((label, index) => (
           <Step key={label} completed={completedSteps[index]}>
             <StepLabel color="inherit" sx={{
@@ -137,11 +131,11 @@ const OrderScreen = () => {
       </Stepper>
 
       {activeStep === 1 && (
-        <AddAddressStep onChangeAddress={(address) => setAddress(address)} />
+        <AddAddressStep onChangeAddress={(address) => setAddress(address)}/>
       )}
 
       {activeStep === 2 && (
-        <PlaceOrderStep address={address} product={product} />
+        <PlaceOrderStep address={address} product={product}/>
       )}
 
       <ActionStep

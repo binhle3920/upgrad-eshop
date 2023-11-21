@@ -1,7 +1,7 @@
 import { API_URL } from "../utils/constants";
 import { getAccessToken } from "../common/services/auth";
 
-export const addProduct = async ({ name, category, price, description, manufacturer, availableItems, imageUrl }) => {
+export const addProduct = async ({name, category, price, description, manufacturer, availableItems, imageUrl}) => {
   const accessToken = getAccessToken();
 
   return await fetch(
@@ -12,7 +12,7 @@ export const addProduct = async ({ name, category, price, description, manufactu
         "Content-Type": "application/json",
         "Authorization": `Bearer ${accessToken}`
       },
-      body: JSON.stringify({ name, category, price, description, manufacturer, availableItems, imageUrl }),
+      body: JSON.stringify({name, category, price, description, manufacturer, availableItems, imageUrl}),
     }
   );
 }
@@ -56,7 +56,15 @@ export const removeProduct = async (productId) => {
   )
 }
 
-export const modifyProduct = async (productId, { name, category, price, description, manufacturer, availableItems, imageUrl }) => {
+export const modifyProduct = async (productId, {
+  name,
+  category,
+  price,
+  description,
+  manufacturer,
+  availableItems,
+  imageUrl
+}) => {
   const accessToken = getAccessToken();
 
   return await fetch(
@@ -67,7 +75,7 @@ export const modifyProduct = async (productId, { name, category, price, descript
         "Content-Type": "application/json",
         "Authorization": `Bearer ${accessToken}`
       },
-      body: JSON.stringify({ name, category, price, description, manufacturer, availableItems, imageUrl }),
+      body: JSON.stringify({name, category, price, description, manufacturer, availableItems, imageUrl}),
     }
   )
 }

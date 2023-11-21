@@ -1,6 +1,6 @@
 import { API_URL } from "../utils/constants";
 
-export const signUp = async ({ firstName, lastName, email, contactNumber, password }) => {
+export const signUp = async ({firstName, lastName, email, contactNumber, password}) => {
   return await fetch(
     `${API_URL}/auth/signup`,
     {
@@ -13,7 +13,7 @@ export const signUp = async ({ firstName, lastName, email, contactNumber, passwo
   );
 }
 
-export const login = async ({ username, password }) => {
+export const login = async ({username, password}) => {
   return await fetch(
     `${API_URL}/auth/signin`,
     {

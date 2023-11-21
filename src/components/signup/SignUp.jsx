@@ -1,4 +1,4 @@
-import { Box, Stack, Typography, TextField } from "@mui/material";
+import { Box, Stack, TextField, Typography } from "@mui/material";
 import LockOutlinedIcon from '@mui/icons-material/LockOutlined';
 import CommonButton from "../../common/components/Button";
 import Footer from "../../common/components/Footer";
@@ -15,8 +15,8 @@ const SignUpScreen = () => {
   const [password, setPassword] = useState('');
 
   const navigate = useNavigate();
-  const { user, signup } = useAuth();
-  const { showNotification } = useSnackbar();
+  const {user, signup} = useAuth();
+  const {showNotification} = useSnackbar();
 
   useEffect(() => {
     if (user) {
@@ -71,7 +71,7 @@ const SignUpScreen = () => {
     const contactNumber = e.target.contactNumber.value;
     const password = e.target.password.value;
 
-    const response = await signup({ firstName, lastName, email, contactNumber, password });
+    const response = await signup({firstName, lastName, email, contactNumber, password});
     showNotification(response);
   }
 
@@ -81,7 +81,7 @@ const SignUpScreen = () => {
         <Stack p={1} alignItems="center" bgcolor="#f60157" borderRadius="50%">
           <LockOutlinedIcon sx={{
             color: '#ffffff'
-          }} fontSize="large" />
+          }} fontSize="large"/>
         </Stack>
 
         <Typography variant="h4" pb={2}>
@@ -92,9 +92,9 @@ const SignUpScreen = () => {
           width: '100%',
         }}>
           <Stack direction="column" spacing={2} width="100%">
-            <TextField id="firstName" label="First Name" variant="outlined" type="text" required maxLength={255} />
-            <TextField id="lastName" label="Last Name" variant="outlined" type="text" required maxLength={255} />
-            <TextField id="email" label="Email Address" variant="outlined" type="email" required maxLength={50} />
+            <TextField id="firstName" label="First Name" variant="outlined" type="text" required maxLength={255}/>
+            <TextField id="lastName" label="Last Name" variant="outlined" type="text" required maxLength={255}/>
+            <TextField id="email" label="Email Address" variant="outlined" type="email" required maxLength={50}/>
             <TextField
               id="password"
               label="Password"
@@ -129,7 +129,7 @@ const SignUpScreen = () => {
             />
 
             <Stack pt={2}>
-              <CommonButton label="Sign Up" type="submit" />
+              <CommonButton label="Sign Up" type="submit"/>
             </Stack>
           </Stack>
         </form>
@@ -143,7 +143,7 @@ const SignUpScreen = () => {
         </Link>
 
         <Box pt={4}>
-          <Footer />
+          <Footer/>
         </Box>
       </Stack>
     </Stack>

@@ -4,7 +4,7 @@ import { ROUTES, USER_ROLES } from "../../utils/constants";
 import { useEffect } from "react";
 
 const AdminGuard = () => {
-  const { user } = useAuth();
+  const {user} = useAuth();
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -17,7 +17,7 @@ const AdminGuard = () => {
     }
   }, [user, navigate]);
 
-  return <Outlet />;
+  return <Outlet/>;
 };
 
 export default AdminGuard;

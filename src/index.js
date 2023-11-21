@@ -12,12 +12,12 @@ function ConnectedApp() {
     <AuthProvider>
       <ProductsProvider>
         <SnackbarProvider>
-          <App />
-          <CustomSnackbar />
+          <App/>
+          <CustomSnackbar/>
         </SnackbarProvider>
       </ProductsProvider>
     </AuthProvider>
   );
 }
 
-createRoot(document.getElementById("root")).render(<ConnectedApp />);
+createRoot(document.getElementById("root")).render(<ConnectedApp/>);
