@@ -1,5 +1,5 @@
 import { useProducts } from "../../context/products/products-context";
-import { Box , Stack} from "@mui/material";
+import { Box , Stack, ToggleButtonGroup, ToggleButton} from "@mui/material";
 import ProductItem from "../../common/components/ProductItem";
 import ConfirmDialog from "../../common/components/ConfirmDialog";
 import { useState } from "react";
@@ -29,6 +29,33 @@ const HomeScreen = () => {
   }
 
   return (
+    <>
+    <Stack alignItems="center" justifyContent="center">
+    <ToggleButtonGroup
+    //value={selectedCategory}
+    exclusive
+    //onChange={handleCategoryChange}
+    aria-label="category"
+    size="large"
+    sx={{ marginTop: 2, marginLeft: 2 }}
+  >
+    <ToggleButton value="All" aria-label="All">
+      ALL
+    </ToggleButton>
+    <ToggleButton value="Apparel" aria-label="Apparel">
+      APPAREL
+    </ToggleButton>
+    <ToggleButton value="Electronics" aria-label="Electronics">
+      ELECTRONICS
+    </ToggleButton>
+    <ToggleButton value="Footwear" aria-label="Footwear">
+      FOOTWEAR
+    </ToggleButton>
+    <ToggleButton value="PersonalCare" aria-label="PersonalCare">
+      PERSONAL CARE
+    </ToggleButton>
+  </ToggleButtonGroup>
+  </Stack>
     <Box p={4}>
      <Stack direction='row' justifyContent="space-evenly" sx={{flexWrap:'wrap', rowGap:5 , columnGap:5}}> {
         products.map(product => (
@@ -44,6 +71,7 @@ const HomeScreen = () => {
         onSubmit={handleDeleteProduct}
       />
     </Box>
+    </>
   )
 }
 

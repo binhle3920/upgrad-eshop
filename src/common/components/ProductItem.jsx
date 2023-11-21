@@ -1,4 +1,4 @@
-import { Box, IconButton, Paper, Stack , Typography} from "@mui/material";
+import { IconButton, Paper, Stack , Typography , ToggleButton , ToggleButtonGroup} from "@mui/material";
 import CommonButton from "./Button";
 import { useAuth } from "../../context/auth/auth-context";
 import { ROUTES, USER_ROLES } from "../../utils/constants";
@@ -19,8 +19,15 @@ const ProductItem = ({ id, imageUrl, name, description, price, onDelete }) => {
   const handleEdit = () => {
     navigate(`${ROUTES.ADMIN.EDIT_PRODUCT}/${id}`);
   }
+  const handleCategoryChange = (event, newCategory) => {
+    if (newCategory !== null) {
+      //setSelectedCategory(newCategory);
+      // Add logic here to filter products based on the selected category if needed
+    }
+  }
 
   return (
+<>
     <Paper elevation={2} sx={{
       width: 400,
       height: 550
@@ -64,6 +71,7 @@ const ProductItem = ({ id, imageUrl, name, description, price, onDelete }) => {
         </Stack>
       </Stack>
     </Paper>
+    </>
   )
 }
 
