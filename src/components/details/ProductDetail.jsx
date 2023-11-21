@@ -43,13 +43,13 @@ const ProductDetailScreen = () => {
   }
 
   return (
-    <Stack direction="row" spacing={10} mt={20} justifyContent="center" alignItems="flex-start">
+    <Stack direction="row" spacing={10} mt={20} justifyContent="center" alignItems="flex-start" mx={10}>
       <Stack>
         <img src={product.imageUrl || "https://www.rallis.com/Upload/Images/thumbnail/Product-inside.png"} width="500"
              alt={product.name}/>
       </Stack>
 
-      <Stack>
+      <Stack minWidth={600}>
         <Stack direction="row" spacing={2} alignItems="center">
           <Typography variant="h4">{product.name}</Typography>
           <Chip
